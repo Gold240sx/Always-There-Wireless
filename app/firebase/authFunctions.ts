@@ -161,7 +161,7 @@ export const SignOut = () => {
 			console.log("User has been logged out.")
 			// You can also redirect the user to another page or perform any other actions here.
 		})
-		.catch((error) => {
+		.catch((error: any) => {
 			console.error("Error logging out:", error.message)
 		})
 }
@@ -184,7 +184,7 @@ export const useAuth = (fetchUserData = false) => {
 	}
 
 	useEffect(() => {
-		const unsubscribe = onAuthStateChanged(auth, async (authUser) => {
+		const unsubscribe = onAuthStateChanged(auth, async (authUser: any) => {
 			setUser(authUser)
 			setUserData(null)
 			setIsAdmin(false) // Reset admin status initially
@@ -208,7 +208,7 @@ export const useAuth = (fetchUserData = false) => {
 		})
 
 		return unsubscribe
-	}, [])
+	}, [fetchUserData])
 
 	// Check if there is no user, and return the entire function with default values
 	if (!user) {
