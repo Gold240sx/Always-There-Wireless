@@ -11,24 +11,24 @@ import ContactForm from "./Forms/newContactForm"
 import ProductForm from "./Forms/newProductForm"
 import UserForm from "./Forms/newUserForm"
 import QualificationForm from "./Forms/newQualificationForm"
-import lottie from "lottie-web"
-import { defineElement } from "lord-icon-element"
+// import lottie from "lottie-web"
+// import { defineElement } from "lord-icon-element"
 import { MoonLoader } from "react-spinners"
 import { formSubmission } from "./formSubmission"
-defineElement(lottie.loadAnimation)
+// ment(lottie.loadAnimation)
 
-const LordIconCelebrate = () => {
-	return (
-		<lord-icon
-			// @ts-expect-error lord-icon typing required for linting error to go away (attempted via /global.d.ts)
-			src="https://cdn.lordicon.com/ihyatngg.json"
-			trigger="loop"
-			colors={{ primary: "#4be1ec", secondary: "#cb5eee" }}
-			style={{ width: "400px", height: "400px" }}
-			className="w-full h-full"
-		/>
-	)
-}
+// const LordIconCelebrate = () => {
+// 	return (
+// 		<lord-icon
+// 			// @ts-expect-error lord-icon typing required for linting error to go away (attempted via /global.d.ts)
+// 			src="https://cdn.lordicon.com/ihyatngg.json"
+// 			trigger="loop"
+// 			colors={{ primary: "#4be1ec", secondary: "#cb5eee" }}
+// 			style={{ width: "400px", height: "400px" }}
+// 			className="w-full h-full"
+// 		/>
+// 	)
+// }
 
 export type Inputs = z.infer<typeof ApplicationFormSchema>
 
@@ -287,7 +287,7 @@ export default function MultiForm() {
 										<p className="mt-1 text-sm leading-6 text-gray-600">
 											Thank you for your submission.
 										</p>
-										<LordIconCelebrate />
+										{/* <LordIconCelebrate /> */}
 									</>
 								)}
 							</>
