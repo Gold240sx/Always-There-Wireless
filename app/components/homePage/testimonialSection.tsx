@@ -48,12 +48,12 @@ const TestimonialSection = () => {
 						</svg>
 						<blockquote className="text-xl font-semibold leading-8 text-white sm:text-2xl sm:leading-9">
 							<p>
-								I truely didn `@apos;`t believe that I would be
+								I truely didn&apos;t believe that I would be
 								able to get a pretty stellar phone for $20. But
 								sure enough, just as they said, I spent a couple
 								of minutes filling out the form, and they handed
 								me the phone. Now I can focus on bettering my
-								life. Nothing can hold me back! I `@apos;`m
+								life. Nothing can hold me back! I&apos;m
 								running for president baby!
 							</p>
 						</blockquote>

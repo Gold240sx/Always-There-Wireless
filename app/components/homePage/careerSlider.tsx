@@ -10,7 +10,7 @@ const CareerSlider = () => {
 				href="/careers"
 				className="flex items-center p-1 pr-2 text-white bg-black rounded-full hover:text-gray-200 sm:text-base lg:text-sm xl:text-base">
 				<p className="rounded-full bg-indigo-500 px-3 py-0.5 text-sm font-semibold leading-5 text-white">
-					We `@apos;`re hiring
+					We&apos;re hiring
 				</p>
 				<p className="ml-4 text-sm">Visit our careers page</p>
 				<ChevronRightIcon
