@@ -1,0 +1,48 @@
+{
+	"compilerOptions": {
+		"target": "es5",
+		"lib": ["dom", "dom.iterable", "esnext"],
+		"allowJs": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"noEmit": true,
+		"esModuleInterop": true,
+		"module": "esnext",
+		"moduleResolution": "bundler",
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"jsx": "preserve",
+		"incremental": true,
+		"plugins": [
+			{
+				"name": "next"
+			}
+		],
+		"paths": {
+			"@/*": ["./*"],
+			"@styles/*": ["./app/styles/*"],
+			"@app/*": ["./app/*"],
+			"@utils/*": ["./app/utils/*"],
+			"@api/*": ["./api/*"],
+			"@lib/*": ["./app/lib/*"],
+			"@assets/*": ["./assets/*"],
+			"@context/*": ["./app/context/*"],
+			"@images/*": ["./assets/images/*"],
+			"@icons/*": ["./assets/icons/*"],
+			"@components/*": ["./app/components/*"],
+			"@functions/*": ["./app/functions/*"],
+			"@types/*": ["./app/types/*"],
+			"@shadcn/*": ["./app/components/shadcn/*"],
+			"@firebase/*": ["./app/firebase/*"],
+			"@admin/*": ["./app/(pages)/(admin)/*"]
+		}
+	},
+	"include": [
+		"next-env.d.ts",
+		"**/*.ts",
+		"**/*.tsx",
+		".next/types/**/*.ts",
+		"app/components/tailwindUI"
+	],
+	"exclude": ["node_modules"]
+}
