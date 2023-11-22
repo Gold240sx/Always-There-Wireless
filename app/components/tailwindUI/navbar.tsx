@@ -10,7 +10,6 @@ import { Dialog } from "@headlessui/react"
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline"
 import { SiteParams } from "@context/library"
 import { useAuth, SignOut } from "@firebase/authFunctions"
-import Image from "next/image"
 import Link from "next/link"
 import SiteIcon from "../siteIcon" // in place of a static image
 
