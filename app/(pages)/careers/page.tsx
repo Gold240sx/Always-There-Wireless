@@ -15,6 +15,7 @@ const Careers = () => {
 	const [form, setForm] = useState("")
 	const [pageData, setPageData] = useState<any>()
 	const [position, setPosition] = useState<string>("")
+	const [maxHeight, setMaxHeight] = useState("800px")
 	const jobCount = pageData?.length
 	const toggleMainForm = () => {
 		setFormOpen(!formOpen)
@@ -35,6 +36,11 @@ const Careers = () => {
 			} catch (err) {
 				console.log(err)
 			}
+		}
+
+		if (typeof window !== "undefined") {
+			const calculatedHeight = Math.max(window.innerHeight * 0.5, 800) + "px"
+			setMaxHeight(calculatedHeight)
 		}
 
 		fetchData()
@@ -58,8 +64,7 @@ const Careers = () => {
 				<div
 					className="object-fill "
 					style={{
-						maxHeight:
-							Math.max(window.innerHeight * 0.5, 800) + "px",
+						maxHeight
 					}}>
 					<Image
 						src={CareerHeaderImage}
