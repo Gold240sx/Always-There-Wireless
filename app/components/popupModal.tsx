@@ -10,7 +10,7 @@ interface PopupModalProps {
 	toggleMainForm: () => void
 	formOpen?: boolean
 	form: "SignupForm" | "SupportForm" | "JobApplication" | ""
-	subCategory?: ""
+	subCategory?: string
 }
 
 interface FormComponents {

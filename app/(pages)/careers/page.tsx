@@ -1,13 +1,9 @@
 "use client"
 import React, { useEffect, useState } from "react"
-import Link from "next/link"
 import Image from "next/image"
-import Banner from "@/app/components/banner/banner"
 import {
-	getCollectionDocs,
 	collection,
 	db,
-	getDoc,
 	getDocs,
 } from "@firebase/storeFunctions"
 import CareerHeaderImage from "@/app/assets/images/careerHeaderImage.jpg"
@@ -117,10 +113,10 @@ const Careers = () => {
 										job.status === "ongoing"
 											? "text-lime-600"
 											: job.status === "filled"
-											  ? "text-zinc-300"
-											  : job.status === "opening soon"
-											    ? "text-amber-400"
-											    : "text-zinc-500"
+												? "text-zinc-300"
+												: job.status === "opening soon"
+													? "text-amber-400"
+													: "text-zinc-500"
 									} mx-1 my-2 uppercase text-lime-600`}>
 									{job.status}
 								</p>
