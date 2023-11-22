@@ -23,7 +23,7 @@ export default function TWNavbar() {
 	return (
 		<header className=" w-full">
 			{mobileMenuOpen && (
-				<div className="absolute bg-white/50 z-50 dark:bg-zinc-700/50 blur-sm backdrop-blur-md  h-screen w-screen"></div>
+				<div className="absolute  bg-white/50 dark:bg-zinc-700/50 blur-sm backdrop-blur-md  h-screen w-screen"></div>
 			)}
 			<nav
 				className="mx-auto flex relative max-w-7xl items-center justify-between gap-x-6 p-6 lg:px-8"
@@ -111,6 +111,7 @@ export default function TWNavbar() {
 									</p>
 								)}
 								{userData && (
+									// @ts-expect-warning avatar needs to be loaded dynamically
 									<img
 										alt="avatar"
 										src={userData.avatarUrl}
