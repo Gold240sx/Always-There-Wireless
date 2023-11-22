@@ -1,6 +1,26 @@
-// import React from "react"
+import React from "react"
+import { SVGProps } from "react"
 
-const SiteParams = {
+type NavLink = {
+	name: string
+	href: string
+}
+type SocialLink = {
+	name: string
+	href: string
+	icon: React.FC<SVGProps<SVGSVGElement>>
+}
+type FooterNavigation = {
+	socials: SocialLink[]
+}
+
+type SiteParamProps = {
+	companyName: string
+	navigation: NavLink[]
+	footerNavigation: FooterNavigation[] | []
+}
+
+const SiteParams: SiteParamProps = {
 	// companyLogo: {
 	// 	icon: "/app/assets/icons/tenaktalk_icon_lg.png",
 	// 	medium: "/tenaktalk_icon_lg.png",
