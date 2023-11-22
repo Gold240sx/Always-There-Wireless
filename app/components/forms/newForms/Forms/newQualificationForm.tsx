@@ -19,14 +19,16 @@ type BenefitData = {
 }
 type BenefitFormProps = BenefitData & {
 	// this type means we can update any or all fields that belong to the user Data.
-	data: any
-	updateFields: (fields: Partial<BenefitData>) => void
+	data?: any
+	updateFields: any
 	formData: any
 	setFormData: any
 	setValue: any
 	control: any
+	unregister: any
 	errors: any
 	register: any
+	watch: any
 }
 
 // type Item = {

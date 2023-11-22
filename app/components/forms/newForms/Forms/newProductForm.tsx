@@ -42,8 +42,12 @@ type ProductData = {
 	lastFour: string
 }
 
-type ProductFormProps = ProductFormData & {
-	updateFields: (fields: Partial<ProductFormData>) => void
+type ProductFormProps = {
+	errors: any
+	setValue: any
+	formData: any
+	register: any
+	updateFields: any
 	pickedProduct: string
 }
 
