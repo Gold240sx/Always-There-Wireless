@@ -129,6 +129,14 @@
 	input::-ms-reveal {
 		display: none;
 	}
+	/* remove blue ring from focused links and <a>'s */
+	a,
+	a:focus,
+	a:focus *,
+	a:focus-visible,
+	a:focus-visible * {
+		outline: none;
+	}
 }
 
 @layer components {

@@ -16,20 +16,23 @@ type FooterNavigation = {
 
 type SiteParamProps = {
 	companyName: string
+	siteDescription: string
 	navigation: NavLink[]
+	adminNavigation: NavLink[]
 	footerNavigation: FooterNavigation[] | []
 }
 
 const SiteParams: SiteParamProps = {
-	// companyLogo: {
-	// 	icon: "/app/assets/icons/tenaktalk_icon_lg.png",
-	// 	medium: "/tenaktalk_icon_lg.png",
-	// 	large: "/app/assets/icons/tenaktalk_icon_lg.png",
-	// },
-	companyName: "TenakTalk",
+	companyName: "Always There Wireless",
+	siteDescription:
+		"Get a discounted or free smart phone or tablet with proof of government assistence!",
 	navigation: [
 		{ name: "About", href: "/about" },
 		{ name: "Careers", href: "/careers" },
+	],
+	adminNavigation: [
+		{ name: "Users", href: "/users" },
+		{ name: "Applications", href: "/applicants" },
 	],
 	footerNavigation: [
 		// {
