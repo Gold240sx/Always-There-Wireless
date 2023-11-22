@@ -27,7 +27,7 @@
 			"@lib/*": ["./app/lib/*"],
 			"@assets/*": ["./assets/*"],
 			"@context/*": ["./app/context/*"],
-			"@images/*": ["./assets/images/*"],
+			"@images/*": ["./app/assets/images/*"],
 			"@icons/*": ["./assets/icons/*"],
 			"@components/*": ["./app/components/*"],
 			"@functions/*": ["./app/functions/*"],

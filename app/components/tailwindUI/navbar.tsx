@@ -71,7 +71,7 @@ export default function TWNavbar() {
 				</div>
 				<div
 					id="login-actions"
-					className="hidden gap-3 md:absolute md:inset-y-0 md:right-10 md:flex md:items-center md:justify-end">
+					className="hidden gap-3 md:absolute md:inset-y-0 md:right-16 mt-2 lg:right-10 md:flex md:items-center md:justify-end">
 					<div className="flex flex-col gap-2 items-right">
 						<div className="flex items-end gap-3">
 							{isAdmin && (
@@ -112,7 +112,7 @@ export default function TWNavbar() {
 									</p>
 								)}
 								{userData && (
-									<Image
+									<img
 										alt="avatar"
 										src={userData.avatarUrl}
 										className="w-10 h-10 ml-auto rounded-full"
@@ -191,12 +191,12 @@ export default function TWNavbar() {
 						<div className="-my-6 divide-y divide-gray-500/10">
 							<div className="space-y-2 py-6">
 								{navigation.map((item) => (
-									<a
+									<Link
 										key={item.name}
 										href={item.href}
 										className="-mx-3 block rounded-lg px-3 py-2 text-xl leading-7 text-zinc-500 hover:bg-gray-50">
 										{item.name}
-									</a>
+									</Link>
 								))}
 							</div>
 							<div className="py-6">
