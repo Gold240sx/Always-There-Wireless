@@ -155,7 +155,7 @@ export const ATWDataRecieving = () => (
 						<div className="flex flex-col w-auto px-3 border-2 border-zinc-400 h-fit">
 							<table className="border-gray-200 table-auto border-1 rounded-xl bg-[#fbfbfc]" style={table}>
 								<thead className="bg-gray-200 rounded-t-lg">
-									<tr className="text-xl bg-gray-200 text-zinc-600 bg-white py-2.5" style={{ borderRadius: "10px" }}>
+									<tr className="text-xl  text-zinc-600 bg-white py-2.5" style={{ borderRadius: "10px" }}>
 										<th className="px-4 py-2 rounded-tl-lg ">Question</th>
 										<th className="px-4 py-2 rounded-tr-lg">Response</th>
 									</tr>
