@@ -10,7 +10,7 @@ export async function POST(request: Request) {
 
 	try {
 		const data = await resend.emails.send({
-			from: "Always There Wireless <onboarding@resend.dev>",
+			from: "Always There Wireless <alwaystherewireless.com>",
 			to: "ohioacppts@gmail.com",
 			subject: "ATW - Application Request!!!",
 			react: ApplicationEmailTemplate({ firstName, lastName, email, phoneDetails, address, qualification, DOB, lastFour, userAccount, pickedProduct, status }),

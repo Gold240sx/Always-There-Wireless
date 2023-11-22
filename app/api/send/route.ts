@@ -10,7 +10,7 @@ export async function POST(request: Request) {
 	const bodyData = { firstName: "bert", email: "ernie" }
 	try {
 		const data = await resend.emails.send({
-			from: "Always There Wireless <onboarding@resend.dev>",
+			from: "Always There Wireless <alwaystherewireless.com>",
 			to: "ohioacppts@gmail.com",
 			subject: "More advanced Email: Testing from button!!!",
 			react: EmailTemplate({ firstName, email }),
