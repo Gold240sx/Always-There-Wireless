@@ -157,10 +157,10 @@ export const formSubmission = async (data: dataFormProps) => {
 	}
 	// submit the email to bruce as a notification
 	try {
-		// await SendApplicationEmail({
-		// 	// @ts-expect-error something about the email type issue
-		// 	formData: newData as newDataFormProps,
-		// })
+		await SendApplicationEmail({
+			// @ts-expect-error something about the email type issue
+			formData: newData as newDataFormProps,
+		})
 		console.log("email data: ", newData)
 		// console.log(emailResult)
 	} catch (err) {
