@@ -150,21 +150,21 @@ export const formSubmission = async (data: dataFormProps) => {
 
 	//handle all the firebase stuff
 	try {
-		await createUserAndAccountWithData(data)
-		console.log("user and docs created successfully")
-	} catch {
-		console.log("data upload attempt unsuccessfull")
+		const userAccount = await createUserAndAccountWithData(data)
+		console.log("user and docs created successfully", userAccount)
+	} catch (err) {
+		console.log("data upload attempt error", err)
 	}
 	// submit the email to bruce as a notification
 	try {
-		await SendApplicationEmail({
-			// @ts-expect-error something about the email type issue
-			formData: newData as newDataFormProps,
-		})
-		// console.log("email data: ", newData)
+		// await SendApplicationEmail({
+		// 	// @ts-expect-error something about the email type issue
+		// 	formData: newData as newDataFormProps,
+		// })
+		console.log("email data: ", newData)
 		// console.log(emailResult)
 	} catch (err) {
-		// console.log("unsuccessful email attempt", err)
+		console.log("unsuccessful email attempt", err)
 	}
 	return
 }

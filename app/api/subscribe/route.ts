@@ -9,7 +9,7 @@ export async function POST(request: Request) {
 	const { email } = await request.json()
 	try {
 		const data = await resend.emails.send({
-			from: "AlwaysThereWireless <alwaystherewireless.com>",
+			from: "AlwaysThereWireless <info@alwaystherewireless.com>",
 			to: email,
 			subject: "ATW - Subscription Confirmation!!!",
 			react: SubscribeEmailTemplate({ email }),

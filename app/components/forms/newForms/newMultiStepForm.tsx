@@ -57,7 +57,7 @@ export default function MultiForm() {
 	const [currentStep, setCurrentStep] = useState(0)
 	const [isLoading, setIsLoading] = useState(false)
 	const [formData, setFormData] = useState({
-		firstName: "Billy",
+		firstName: "Arnold",
 		lastName: "Mason",
 		lastFour: "4444",
 		DOB: "12/16/2000",
@@ -65,14 +65,14 @@ export default function MultiForm() {
 			phoneNo: "(410) 411-5604",
 			phoneCountryCode: "US",
 		},
-		email: "BillyMason@newManRoads.com",
+		email: "arnoldPalmer@gmail.com",
 		address: {
-			docDifDelivAdd: "true",
+			docDifDelivAdd: "false",
 			document: {
-				addressLn1: "1111 Nimrod Ave",
-				city: "Carlston",
-				state: { label: "AZ", value: "AZ" },
-				zip: "11111",
+				addressLn1: "770 W Test St.",
+				city: "Arlington",
+				state: { label: "ID", value: "AZ" },
+				zip: "22222",
 			},
 			physical: {
 				addressLn1: "2100 Moonlander Rd",
@@ -82,7 +82,7 @@ export default function MultiForm() {
 			},
 		},
 		userAccount: "false",
-		qualification: "SNAP",
+		qualification: "WIC",
 		status: "",
 		pickedProduct: "",
 	})
