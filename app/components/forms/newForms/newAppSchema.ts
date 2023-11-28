@@ -4,7 +4,7 @@ export const ApplicationFormSchema = z
 	.object({
 		password: z
 			.string()
-			.min(1, { message: "Password is required" })
+			.min(7, { message: "Password must be longer than 6 digits" })
 			.optional(),
 		userAccount: z
 			.string()
@@ -122,7 +122,7 @@ export const ApplicationFormSchema = z
 		lastFour: z.string().refine((value) => /^\d{4}$/.test(value), {
 			message: "Invalid format. Use exactly four digits.",
 		}),
-		pickedProduct: z.enum(["x10", "x65"]),
+		pickedProduct: z.enum(["x10", "x65", "phone", "tablet"]),
 		status: z
 			.enum(["submitted", "reviewed", "denied", "approved", "provided"])
 			.optional(),

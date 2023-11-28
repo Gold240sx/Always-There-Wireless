@@ -14,7 +14,7 @@ import QualificationForm from "./Forms/newQualificationForm"
 // import lottie from "lottie-web"
 // import { defineElement } from "lord-icon-element"
 import { MoonLoader } from "react-spinners"
-import { formSubmission } from "./formSubmission"
+import { formSubmission } from "./newFormSubmission"
 // ment(lottie.loadAnimation)
 
 // const LordIconCelebrate = () => {
@@ -57,32 +57,32 @@ export default function MultiForm() {
 	const [currentStep, setCurrentStep] = useState(0)
 	const [isLoading, setIsLoading] = useState(false)
 	const [formData, setFormData] = useState({
-		firstName: "Arnold",
-		lastName: "Mason",
-		lastFour: "4444",
-		DOB: "12/16/2000",
+		firstName: "",
+		lastName: "",
+		lastFour: "",
+		DOB: "",
 		phoneDetails: {
-			phoneNo: "(410) 411-5604",
+			phoneNo: "",
 			phoneCountryCode: "US",
 		},
-		email: "arnoldPalmer@gmail.com",
+		email: "",
 		address: {
-			docDifDelivAdd: "false",
+			docDifDelivAdd: "",
 			document: {
-				addressLn1: "770 W Test St.",
-				city: "Arlington",
-				state: { label: "ID", value: "AZ" },
-				zip: "22222",
+				addressLn1: "",
+				city: "",
+				state: {},
+				zip: "",
 			},
 			physical: {
-				addressLn1: "2100 Moonlander Rd",
-				city: "Mars Rover Ave",
-				state: { label: "TN", value: "TN" },
-				zip: "54689",
+				addressLn1: "",
+				city: "",
+				state: {},
+				zip: "",
 			},
 		},
-		userAccount: "false",
-		qualification: "WIC",
+		userAccount: "",
+		qualification: "SNAP",
 		status: "",
 		pickedProduct: "",
 	})

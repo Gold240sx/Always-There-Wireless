@@ -11,38 +11,79 @@ function getInitials(firstName: string, lastName: string): string {
 	return `${firstInitial}${lastInitial}`
 }
 
-// check if city is defined or not.
-const hasCityInPhysicalAddress = (incomingData: incomingDataProps): boolean => {
-	return (
-		incomingData.address?.physical &&
-		incomingData.address.physical.city !== undefined
-	)
-}
+// upload the formatted Data
+const handleData = (incomingData: incomingDataProps) => {
+	const { firstName, lastName, user, address } = incomingData
+	const fullName = firstName + " " + lastName
 
-// handleData function focused on submitting formatted data to Firebase
-const handleData = (
-	formattedData: dataWithAddressProps | dataNoAddressProps
-) => {
+	const formatData = (includePhysical: boolean) => {
+		const newData: dataWithAddressProps | dataNoAddressProps = {
+			...incomingData,
+			status: "submitted",
+			name: fullName,
+			address: {
+				document: {
+					...address.document,
+					state: address.document.state.label,
+				},
+				physical?: {
+					...address.document,
+					state: address.document.state.label,
+				}
+			},
+		}
+
+		if (includePhysical) {
+			newData.address.physical = {
+				...address,
+				document: {
+					...address.document,
+					state: address.document.state.label,
+				},
+				physical: {
+					...address.document,
+					state: address.document.state.label,
+				},
+			}
+		}
+
+		delete newData.password // Remove password for security
+
+		return newData
+	}
+
 	try {
-		createDocument({
-			collectionName: "applicants",
-			data: formattedData,
-		})
+		if (address?.physical) {
+			const dataWithPhysical = formatData(true)
+			createDocument({
+				collectionName: "applicants",
+				data: dataWithPhysical,
+			})
+		} else {
+			const dataWithoutPhysical = formatData(false)
+			createDocument({
+				collectionName: "applicants",
+				data: dataWithoutPhysical,
+			})
+		}
 	} catch (err) {
 		console.error("Error creating firebase data:", err)
 	}
 }
 
-// Format data with a physical address
+// Function to format data with a physical address
 const formatDataWithPhysical = (
-	incomingData: incomingDataProps
+	incomingData: incomingDataProps,
+	userId?: string
 ): dataWithAddressProps => {
 	const { firstName, lastName, user, address } = incomingData
-	const fullName = `${firstName} ${lastName}`
+	const fullName = firstName + " " + lastName
+
 	const newDataWithPhysical: dataWithAddressProps = {
 		...incomingData,
 		status: "submitted",
 		name: fullName,
+		userId: userId || "",
 		address: {
 			document: {
 				...address.document,
@@ -58,15 +99,16 @@ const formatDataWithPhysical = (
 		},
 	}
 	delete newDataWithPhysical.password // Remove password for security
+
 	return newDataWithPhysical
 }
 
-// Format data without a physical address
+// Function to format data without a physical address
 const formatDataWithoutPhysical = (
 	incomingData: incomingDataProps
 ): dataNoAddressProps => {
-	const { firstName, lastName, address } = incomingData
-	const fullName = `${firstName} ${lastName}`
+	const { firstName, lastName, user, address } = incomingData
+	const fullName = firstName + " " + lastName
 
 	const newDataWithoutPhysical: dataNoAddressProps = {
 		...incomingData,
@@ -80,16 +122,8 @@ const formatDataWithoutPhysical = (
 		},
 	}
 	delete newDataWithoutPhysical.password // Remove password for security
-	return newDataWithoutPhysical
-}
 
-// Prepare data for Firebase
-const prepareDataForFirebase = (incomingData: incomingDataProps) => {
-	if (incomingData.address?.physical) {
-		return formatDataWithPhysical(incomingData)
-	} else {
-		return formatDataWithoutPhysical(incomingData)
-	}
+	return newDataWithoutPhysical
 }
 
 // handle accountCreation
@@ -154,39 +188,54 @@ const handleEmail = async (emailData: emailDataProps) => {
 // Main handle function
 const newFormSubmission = async (incomingData: incomingDataProps) => {
 	try {
-		let user
 		if (incomingData.userAccount === "true") {
 			console.log("Creating user account...")
-			user = await handleCreateAccount(incomingData)
+			const user = handleCreateAccount(incomingData)
 
-			if (!user) {
+			if (user) {
+				const appDataWithUserData: appDataWithUserDataProps = {
+					...incomingData,
+					user,
+				}
+
+				let formattedData
+
+				if (appDataWithUserData.address?.physical?.city !== undefined) {
+					console.log(
+						"Secondary address present, submitting dataWithAddress"
+					)
+					formattedData = formatDataWithPhysical(
+						appDataWithUserData,
+						user.uid
+					)
+				} else {
+					console.log(
+						"No secondary address, submitting dataNoAddress"
+					)
+					formattedData = formatDataWithoutPhysical(
+						appDataWithUserData,
+						user.uid
+					)
+				}
+
+				handleEmail(incomingData)
+				handleData(formattedData)
+			} else {
 				console.log("No user was created")
 			}
 		}
-
-		const formattedData = prepareDataForFirebase(incomingData)
-
-		if (hasCityInPhysicalAddress(incomingData)) {
-			console.log("Secondary address present, submitting dataWithAddress")
-		} else {
-			console.log(
-				"No secondary address or city, submitting dataNoAddress"
-			)
+		if (incomingData.userAccount === "false") {
+			console.log("User account not needed")
+			const formattedData = formatDataWithoutPhysical(incomingData)
+			handleEmail(incomingData)
+			handleData(formattedData) // Handle data without address
 		}
-
-		createDocument({
-			collectionName: "applicants",
-			data: formattedData,
-		})
-
-		handleEmail(formattedData)
-		handleData(formattedData)
 	} catch (err) {
 		console.error("Error creating a new account:", err)
 	}
 }
 
-export { formSubmission }
+export { newFormSubmission }
 
 ////////////////////////////////////////////////////////////////////////////////// types
 
@@ -194,6 +243,31 @@ export { formSubmission }
 type incomingDataProps = Inputs & {
 	user?: any
 }
+// type incomingDataProps = {
+// 	email: string
+// 	address: {
+// 		physical: {
+// 			addressLn1: string
+// 			city: string
+// 			state: {
+// 				label: string
+// 				value: string
+// 			}
+// 			zip: string
+// 		}
+// 		document: {
+// 			addressLn1: string
+// 			city: string
+// 			state: {
+// 				label: string
+// 				value: string
+// 			}
+// 			zip: string
+// 		}
+// 	}
+// }
+
+// emailDataProps
 
 type emailDataProps = {
 	email: string
@@ -245,19 +319,12 @@ type dataNoAddressProps = Omit<incomingDataProps, "password"> &
 				state: string
 				zip: string
 			}
-			physical?: {
-				// Make 'physical' optional to match the structure
-				addressLn1?: string
-				city?: string
-				state?: string
-				zip?: string
-			}
 		}
 	}
 
 type incomingDataPropsWithPassword = incomingDataProps & {
 	password: string
 }
-// type appDataWithUserDataProps = incomingDataProps & {
-// 	user: any
-// }
+type appDataWithUserDataProps = incomingDataProps & {
+	user: any
+}
