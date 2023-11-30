@@ -1,18 +1,13 @@
 "use client"
 /* eslint-disable */
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Button, Label, TextInput } from "flowbite-react"
 import { getMonth, getDate, format, getYear } from "date-fns"
 import { ExclamationCircleIcon } from "@heroicons/react/20/solid"
+import { BibleRef } from "@context/library"
+import Select from "react-select"
 import * as z from "zod"
-import {
-	useForm,
-	useFieldArray,
-	FieldErrors,
-	useWatch,
-	Controller,
-	SubmitHandler,
-} from "react-hook-form"
+import { useForm, useFieldArray, Controller } from "react-hook-form"
 
 const date = new Date()
 // const currentYear = format(date, "yy")
@@ -31,6 +26,30 @@ const QAFormSchema = z.object({
 			// .transform((v) => Number(v) || 0),
 		})
 		.optional(),
+	BibleRefs: z.array(
+		z.object({
+			// bible ref
+			book: z.string(),
+			chapters: z
+				.array(
+					z.object({
+						// ref
+						chapter: z.number().nullable(),
+						verses: z
+							.array(
+								z.object({
+									// verse
+									verse: z.number().nullable(),
+									span: z.boolean().optional(),
+									verseTo: z.number().nullable().optional(),
+								})
+							)
+							.optional(),
+					})
+				)
+				.optional(),
+		})
+	),
 	QnA: z.array(
 		z.object({
 			question: z
@@ -46,6 +65,264 @@ const QAFormSchema = z.object({
 
 type FormValues = z.infer<typeof QAFormSchema>
 
+const BibleRefComponent = ({
+	field,
+	index: bookIndex,
+	key,
+	control,
+	setValue,
+	removeBibleRef,
+	bibleRefFields,
+}: any) => {
+	const [selectedBook, setSelectedBook] = useState(undefined)
+	const [selectedChapter, setSelectedChapter] = useState({
+		value: undefined,
+		label: undefined,
+	})
+	const BookList = [] as any[]
+	BibleRef.forEach((book) => {
+		if (book.name !== "total") {
+			BookList.push({
+				label: book.name,
+				value: book.name.toUpperCase(),
+			})
+		}
+	})
+	return (
+		<div
+			id={`bibleRef-Book-${bookIndex}`}
+			key={field.id}
+			className="grid grid-cols-12">
+			{/* Book */}
+			<div
+				className={`${
+					selectedBook
+						? selectedChapter.value == undefined
+							? "col-span-7"
+							: "col-span-5"
+						: "col-span-11 pr-2"
+				} relative px-1 mb-2`}>
+				{/* <p>{selectedChapter.value}</p> */}
+				<Label
+					htmlFor={`BibleRefs[${bookIndex}].bookFrom`}
+					value="Book"
+					className="px-1 text-sm font-semibold leading-6 text-gray-900 "
+				/>
+				<Controller
+					name={`BibleRefs[${bookIndex}].bookFrom`}
+					control={control}
+					render={({ field }: any) => (
+						<Select
+							{...field}
+							className="mb-4 rounded-lg bg-[#F9FAFB]"
+							options={BookList}
+							placeholder="Book"
+							isSearchable
+							onChange={(selectedOption) => {
+								field.onChange(selectedOption || "")
+								setSelectedBook(selectedOption?.label) // Update selected book
+							}}
+							styles={
+								{
+									// ... (existing styles)
+								}
+							}
+						/>
+					)}
+				/>
+			</div>
+			{/*  additional questions (mapped array)*/}
+			{selectedBook && (
+				<div
+					id={`chapters-map-container`}
+					className={`${
+						selectedBook
+							? selectedChapter.value == undefined
+								? "col-span-4 pr-2"
+								: "col-span-6 pr-2"
+							: "col-span-11 pr-2"
+					} relative px-1 mb-2`}>
+					{field.chapters.map(
+						(chapter: any, chapterIndex: number) => (
+							<ChapterRefComponent
+								chapter={chapter}
+								chapterIndex={chapterIndex}
+								selectedBook={selectedBook}
+								field={field}
+								bookIndex={bookIndex}
+								control={control}
+								setValue={setValue}
+								selectedChapter={selectedChapter}
+								setSelectedChapter={setSelectedChapter}
+							/>
+						)
+					)}
+				</div>
+			)}
+			<button
+				className="text-xl  h-fit my-auto aspect-square p-1 rounded-lg border-zinc-300 border col-span-1"
+				disabled={bibleRefFields.length === 1}
+				onClick={() => {
+					if (bibleRefFields.length > 1) {
+						removeBibleRef(bookIndex)
+					}
+				}}>
+				X
+			</button>
+		</div>
+	)
+}
+
+const ChapterRefComponent = ({
+	selectedBook,
+	chapter,
+	chapterIndex,
+	control,
+	field,
+	setValue,
+	bookIndex,
+	selectedChapter,
+	setSelectedChapter,
+}: {
+	selectedBook: string
+}) => {
+	const ChapterList = BibleRef.flatMap((book) => {
+		if (book.name === selectedBook) {
+			const chapters = Object.entries(book.chapters)
+				.filter(([key]) => key !== "total")
+				.map(([chapterNum]) => ({
+					label: chapterNum,
+					value: chapterNum,
+				}))
+			return chapters
+		}
+		return []
+	})
+	const selectedBookChapters = BibleRef.find(
+		(book) => book.name === selectedBook
+	)?.chapters
+	const selectedChapterVerses = selectedBookChapters
+		? selectedBookChapters[selectedChapter]
+		: []
+
+	return (
+		<div key={`chapter-${chapterIndex}`} className="flex gap-2">
+			<div
+				className={`${
+					selectedChapter.value === undefined ? "w-full" : "w-1/2"
+				}`}>
+				<Label
+					htmlFor={`BibleRefs[${bookIndex}].chapters[${chapterIndex}].chapter`}
+					value="Chapter"
+					className="px-1  text-sm font-semibold leading-6 text-gray-900 "
+				/>
+				<Controller
+					name={`BibleRefs[${bookIndex}].chapters[${chapterIndex}].chapter`}
+					control={control}
+					render={({ field }: any) => (
+						<Select
+							{...field}
+							isSearchable
+							options={ChapterList}
+							className=""
+							placeholder="Chapter"
+							onChange={(selectedOption) => {
+								field.onChange(selectedOption)
+								setSelectedChapter(selectedOption)
+							}}
+						/>
+					)}
+				/>
+			</div>
+			{/* Render verse dropdowns similarly if available */}
+			{selectedChapter.value !== undefined && (
+				<VerseRefComponent
+					field={field}
+					chapterIndex={chapterIndex}
+					bookIndex={bookIndex}
+					control={control}
+					selectedBook={selectedBook}
+					selectedChapter={selectedChapter}
+				/>
+			)}
+		</div>
+	)
+}
+
+const VerseRefComponent = ({
+	field,
+	chapterIndex,
+	bookIndex,
+	control,
+	selectedChapter,
+	selectedBook,
+}) => {
+	const selectedBookData = BibleRef.find((book) => book.name === selectedBook)
+	let VerseList: { label: string; value: string }[] = []
+
+	if (selectedBookData) {
+		const chapterData = selectedBookData.chapters[selectedChapter.value]
+
+		if (chapterData) {
+			VerseList = Array.from({ length: chapterData }, (_, index) => ({
+				label: (index + 1).toString(),
+				value: (index + 1).toString(),
+			}))
+		}
+	}
+
+	return (
+		<div
+			className={`	${
+				selectedChapter.value === undefined ? "w-full" : "w-1/2"
+			}`}>
+			{field.chapters[chapterIndex].verses && (
+				<div>
+					{field.chapters[chapterIndex].verses.map(
+						(verse: any, verseIndex: number) => (
+							<div key={`verse-${verseIndex}`}>
+								<Label
+									htmlFor={`BibleRefs[${bookIndex}].chapters[${chapterIndex}].verses[${verseIndex}].verse`}
+									value={`Verse ${verseIndex + 1}`}
+									className="px-1 text-sm font-semibold leading-6 text-gray-900"
+								/>
+								<Controller
+									name={`BibleRefs[${bookIndex}].chapters[${chapterIndex}].verses[${verseIndex}].verse`}
+									control={control}
+									render={({ field }: any) => (
+										<Select
+											{...field}
+											isSearchable
+											options={VerseList}
+											placeholder="Verse"
+											// onChange={(
+											// 	selectedOption
+											// ) => {
+											// 	field.onChange(
+											// 		selectedOption ||
+											// 			""
+											// 	)
+											// 	setValue(
+											// 		"BibleRef.verse",
+											// 		{
+											// 			label: undefined,
+											// 			value: undefined,
+											// 		}
+											// 	)
+											// }}
+											// ... (verse dropdown logic)
+										/>
+									)}
+								/>
+							</div>
+						)
+					)}
+				</div>
+			)}
+		</div>
+	)
+}
+
 function QuestionAnswerForm() {
 	const [isLoading, setIsLoading] = useState(false)
 	const {
@@ -53,6 +330,7 @@ function QuestionAnswerForm() {
 		control,
 		handleSubmit,
 		reset,
+		setValue,
 		formState: { errors },
 	} = useForm({
 		defaultValues: {
@@ -62,15 +340,39 @@ function QuestionAnswerForm() {
 				MM: currentMonth,
 				YY: currentYear,
 			},
+			BibleRefs: [
+				{
+					book: undefined,
+					chapters: [
+						{ chapter: undefined, verses: [{ verse: undefined }] },
+					],
+				},
+			],
 		},
 		mode: "onBlur",
 	})
-	const { fields, append, remove } = useFieldArray({
+	const {
+		// rename the values to allow for more than 1 dynamically rendered field
+		// typically would be:  // const { fields, append, remove } = useFieldArray({
+		fields: QnAFields,
+		append: appendQnA,
+		remove: removeQnA,
+	} = useFieldArray({
 		name: "QnA",
 		control,
 	})
 
-	const onSubmit = (data: FormValues | FormValues[]) => {
+	const {
+		fields: bibleRefFields,
+		append: appendBibleRef,
+		remove: removeBibleRef,
+	} = useFieldArray({
+		name: "BibleRefs",
+		control,
+	})
+	// const selectedBookData = BibleRef.find((book) => book.name === selectedBook)
+
+	const onSubmit = (data: FormValues) => {
 		setIsLoading(true)
 		// await new Promise((resolve) => setTimeout(resolve, 2000))
 		console.log("Form Data", data)
@@ -87,8 +389,8 @@ function QuestionAnswerForm() {
 				<div className=" col-span-full">
 					{/* start individual inputs */}
 					{/* Render dynamic inputs for questions */}
-					<div className="rounded-xl sm:bg-white sm:p-3">
-						{fields.map((field, index) => {
+					<div className="rounded-xl sm:bg-white sm:p-3 mb-6">
+						{QnAFields.map((field, index) => {
 							return (
 								<div
 									key={field.id}
@@ -214,11 +516,11 @@ function QuestionAnswerForm() {
 										</section>
 										<Button
 											type="button"
-											disabled={fields.length === 1}
+											disabled={QnAFields.length === 1}
 											className="flex mt-auto col-span-full sm:col-span-2"
 											onClick={() => {
-												if (fields.length > 1) {
-													remove(index)
+												if (QnAFields.length > 1) {
+													removeQnA(index)
 												}
 											}}>
 											Delete
@@ -232,7 +534,7 @@ function QuestionAnswerForm() {
 								type="button"
 								className="flex ml-auto"
 								onClick={() => {
-									append({
+									appendQnA({
 										question: "",
 										timeStamp: "",
 									})
@@ -241,7 +543,52 @@ function QuestionAnswerForm() {
 							</Button>
 						</div>
 					</div>
-					<div className="gap-1 p-3 w-fit">
+					{/* Bible Verse Picker (Array)*/}
+					<div className="rounded-xl sm:bg-white sm:p-3 grid-cols-12 grid">
+						<Label
+							value="Video Bible Refs Array"
+							className="col-span-full text-2xl font-semibold"
+						/>
+						{/* dynamic bible refs */}
+						<section className="p-4 col-span-full">
+							{bibleRefFields.map((field, index) => (
+								<BibleRefComponent
+									bibleRefFields={bibleRefFields}
+									removeBibleRef={removeBibleRef}
+									control={control}
+									setValue={setValue}
+									field={field}
+									index={index}
+									key={index}
+								/>
+							))}
+						</section>
+						<div className="p-3 col-span-full">
+							<Button
+								type="button"
+								className="flex ml-auto"
+								onClick={() => {
+									appendBibleRef({
+										book: undefined,
+										chapters: [
+											{
+												chapter: undefined,
+												verses: [
+													{
+														verse: undefined,
+													},
+												],
+											},
+										],
+									})
+								}}>
+								Add a Bible Reference
+							</Button>
+						</div>
+					</div>
+
+					{/* date pick */}
+					<div id="date pick" className="gap-1 p-3 w-fit">
 						<div className="relative col-span-6 px-1 mb-2">
 							<Label
 								htmlFor="showDate"
@@ -300,6 +647,8 @@ function QuestionAnswerForm() {
 							</div>
 						</div>
 					</div>
+
+					{/* <pre>{JSON.stringify(VerseList, null, 2)}</pre> */}
 				</div>
 				<Button
 					type="button"
