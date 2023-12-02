@@ -4,8 +4,8 @@ import Link from "next/link"
 
 export default async function Home() {
 	return (
-		<section className="col-span-full py-24 width-full min-h-full items-center align-middle justify-center h-full my-auto">
-			<div className=" grid col-span-2 text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:text-left">
+		<section className=" col-span-full min-h-full items-center align-middle justify-centermy-auto">
+			<div className=" text-center lg:max-w-5xl lg:mb-0 lg:text-left ">
 				<Link
 					href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
 					className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
@@ -17,7 +17,7 @@ export default async function Home() {
 							-&gt;
 						</span>
 					</h2>
-					<p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
+					<p className={`m-0 md:max-w-[30ch] text-sm opacity-50`}>
 						Find in-depth information about Next.js features and
 						API.
 					</p>
@@ -34,7 +34,7 @@ export default async function Home() {
 							-&gt;
 						</span>
 					</h2>
-					<p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
+					<p className={`m-0 md:max-w-[30ch] text-sm opacity-50`}>
 						Learn about Next.js in an interactive course
 						with&nbsp;quizzes!
 					</p>
@@ -51,7 +51,7 @@ export default async function Home() {
 							-&gt;
 						</span>
 					</h2>
-					<p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
+					<p className={`m-0 md:max-w-[30ch] text-sm opacity-50`}>
 						Explore starter templates for Next.js.
 					</p>
 				</a>
@@ -67,7 +67,7 @@ export default async function Home() {
 							-&gt;
 						</span>
 					</h2>
-					<p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
+					<p className={`m-0 md:max-w-[30ch] text-sm opacity-50`}>
 						Instantly deploy your Next.js site to a shareable URL
 						with Vercel.
 					</p>

@@ -5,7 +5,7 @@ const navigation = SiteParams.footerNavigation
 export default function Footer() {
 	return (
 		<section className="bg-white/70 z-20">
-			<div className="mx-auto max-w-7xl px-6 py-12 md:flex md:items-center md:justify-between lg:px-8">
+			<div className=" py-12 md:flex px-10 md:items-center md:justify-between lg:px-8">
 				<div className="flex justify-center space-x-6 md:order-2">
 					{navigation.map((item) => (
 						<a

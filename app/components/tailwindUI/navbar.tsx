@@ -14,18 +14,18 @@ export default function TWNavbar() {
 	const { navigation, companyName } = SiteParams
 
 	useEffect(() => {
-		console.log("menuToggle")
+		// console.log("menuToggle")
 	}, [mobileMenuOpen])
 	//
 	return (
-		<header className="z-10 bg-white h-fit w-screen items-center justify-center flex flex-row-col">
+		<header className="z-20 bg-white h-fit w-screen items-center justify-center flex flex-row-col">
 			{mobileMenuOpen && (
 				<div
 					id="mobile-bg-blur-overlay"
-					className="fixed h-full min-h-screen bg-white/50 inset-0 dark:bg-zinc-700/50 blur-sm backdrop-blur-md w-screen"></div>
+					className="fixed h-full min-h-screen z-50 bg-white/50 inset-0 dark:bg-zinc-700/50 blur-sm backdrop-blur-md w-screen"></div>
 			)}
 			<nav
-				className=" flex fixed top-0 bg-white/50 z-10 justify-center  w-full  align-middle mx-auto items-center  gap-x-6 p-6 lg:px-8"
+				className=" flex fixed top-0 bg-white z-10 justify-center  w-full  align-middle mx-auto items-center  gap-x-6 p-6 lg:px-8"
 				aria-label="Global">
 				<div className="flex lg:flex-1 max-w-7xl">
 					<Link
