@@ -104,12 +104,12 @@ const BibleRefComponent = ({
 				} relative px-1 mb-2`}>
 				{/* <p>{selectedChapter.value}</p> */}
 				<Label
-					htmlFor={`BibleRefs[${bookIndex}].bookFrom`}
+					htmlFor={`BibleRefs[${bookIndex}].book`}
 					value="Book"
 					className="px-1 text-sm font-semibold leading-6 text-gray-900 "
 				/>
 				<Controller
-					name={`BibleRefs[${bookIndex}].bookFrom`}
+					name={`BibleRefs[${bookIndex}].book`}
 					control={control}
 					render={({ field }: any) => (
 						<Select

@@ -42,7 +42,8 @@
 		"**/*.ts",
 		"**/*.tsx",
 		".next/types/**/*.ts",
-		"app/components/tailwindUI"
+		"app/components/tailwindUI",
+		"app/(pages)/about"
 	],
 	"exclude": ["node_modules"]
 }

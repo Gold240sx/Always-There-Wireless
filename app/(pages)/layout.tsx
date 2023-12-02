@@ -15,9 +15,8 @@ import Chevrons from "../components/tailwindUI/chevrons"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-	title: "Tenak Talk",
-	description:
-		"A website for Noahides, Ex-Christians, and prospective Jewish Converts",
+	title: "2023 Base",
+	description: "A Web description",
 }
 
 export default function RootLayout({
@@ -29,9 +28,9 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body
-				className={`${inter.className} min-h-screen w-screen relative m-0 p-0`}>
+				className={`${inter.className} bg-cover object-cover min-h-screen w-screen relative m-0 p-0`}>
 				<div className=" absolute flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px]"></div>
-				<header className="fixed top-0 left-0 flex flex-col items-start justify-between w-full duration-500 align-center ">
+				<header className="fixed top-0 z-10 left-0 flex flex-col items-start justify-between w-full duration-500 align-center ">
 					{/* <Link
 						href="/"
 						className="flex mr-auto text-2xl font-bold text-white uppercase logo whitespace-nowrap w-fit">
@@ -39,14 +38,15 @@ export default function RootLayout({
 					</Link> */}
 					{/* <Navbar /> */}
 					<TWNavbar />
-					<Chevrons />
 				</header>
-				<main className=" flex h-full flex-col items-center justify-between p-24">
-					<div className="flex items-center justify-center w-full max-w-5xl font-mono text-sm lg:flex">
+				<main className="relative h-full px-24 pt-24 pb-0">
+					{/* pt-24 accounts for the navbar. dont do py-24 or there will be issues with background height. */}
+					<Chevrons />
+					<div className="grid grid-cols-3 md:grid-cols:6 lg:grid-cols-9 xl:grid-cols-12 h-auto justify-center w-full max-w-5xl font-mono text-sm">
 						{children}
 					</div>
 				</main>
-				<footer className="h-fit">
+				<footer className="h-fit mt-auto col-span-full  z-10 ">
 					<TWFooter />
 				</footer>
 			</body>
