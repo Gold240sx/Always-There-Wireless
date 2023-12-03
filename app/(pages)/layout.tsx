@@ -39,10 +39,9 @@ export default function RootLayout({
 					<TWNavbar />
 				</header>
 
-				<main className="relative flex flex-col h-full w-screen">
+				<main className="relative flex flex-col h-full w-screen justify-center items-center">
 					{/* pt-24 accounts for the navbar. dont do py-24 or there will be issues with background height. */}
-					<Chevrons />
-					<div className="grid grid-cols-3 pt-[84px]  px-5 md:px-10 lg:px-2 pb-0 md:grid-cols:6 lg:grid-cols-9 xl:grid-cols-12 h-auto justify-center w-full max-w-5xl font-mono text-sm">
+					<div className="grid grid-cols-3 pt-[84px] pb-0 md:grid-cols:6 lg:grid-cols-9 xl:grid-cols-12 h-auto justify-center w-full  font-mono text-sm">
 						{children}
 					</div>
 					<footer className="h-fit w-full  mt-auto  z-10 ">

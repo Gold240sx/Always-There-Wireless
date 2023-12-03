@@ -15,7 +15,9 @@ import Link from "next/link"
 
 const Chevrons = () => {
 	return (
-		<nav className="flex w-full items-start pt-2" aria-label="Breadcrumb">
+		<nav
+			className="flex w-full pt-4 px-10 items-start"
+			aria-label="Breadcrumb">
 			<ol role="list" className="flex items-center space-x-4">
 				<li>
 					<div>

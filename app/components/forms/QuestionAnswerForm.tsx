@@ -382,7 +382,7 @@ function QuestionAnswerForm() {
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
-			<div className="grid w-full grid-cols-12 gap-4 p-4 mt-4 bg-white/40 rounded-xl min-h-16">
+			<div className="grid w-full grid-cols-12 gap-4 p-4 mt-4 bg-white/40 rounded-xl min-h-16 ">
 				<h1 className="text-3xl text-yellow-500">QuestionForm</h1>
 				<p className="col-span-full">Upload your question</p>
 				{/* <div className="grid grid-cols-12 mt-10 gap-x-6 gap-y-8"> */}
