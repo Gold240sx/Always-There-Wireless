@@ -13,3 +13,4 @@ https://www.youtube.com/watch?v=6HFpw5fcaD8
 -   Support API: Db working, email not working
 -   APP API: neither DB or email working
 -   JOB API: completely working
+-   Redeploy
