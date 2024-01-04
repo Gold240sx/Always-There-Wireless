@@ -10,7 +10,6 @@ import { Dialog } from "@headlessui/react"
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline"
 import { SiteParams } from "@context/library"
 import { useAuth, SignOut } from "@firebase/authFunctions"
-import Image from "next/image"
 import Link from "next/link"
 import SiteIcon from "../siteIcon" // in place of a static image
 
@@ -24,7 +23,7 @@ export default function TWNavbar() {
 	return (
 		<header className=" w-full">
 			{mobileMenuOpen && (
-				<div className="absolute bg-white/50 z-50 dark:bg-zinc-700/50 blur-sm backdrop-blur-md  h-screen w-screen"></div>
+				<div className="absolute  bg-white/50 dark:bg-zinc-700/50 blur-sm backdrop-blur-md  h-screen w-screen"></div>
 			)}
 			<nav
 				className="mx-auto flex relative max-w-7xl items-center justify-between gap-x-6 p-6 lg:px-8"
@@ -71,7 +70,7 @@ export default function TWNavbar() {
 				</div>
 				<div
 					id="login-actions"
-					className="hidden gap-3 md:absolute md:inset-y-0 md:right-10 md:flex md:items-center md:justify-end">
+					className="hidden gap-3 md:absolute md:inset-y-0 md:right-16 mt-2 lg:right-10 md:flex md:items-center md:justify-end">
 					<div className="flex flex-col gap-2 items-right">
 						<div className="flex items-end gap-3">
 							{isAdmin && (
@@ -112,7 +111,8 @@ export default function TWNavbar() {
 									</p>
 								)}
 								{userData && (
-									<Image
+									// @ts-expect-warning avatar needs to be loaded dynamically
+									<img
 										alt="avatar"
 										src={userData.avatarUrl}
 										className="w-10 h-10 ml-auto rounded-full"
@@ -191,12 +191,12 @@ export default function TWNavbar() {
 						<div className="-my-6 divide-y divide-gray-500/10">
 							<div className="space-y-2 py-6">
 								{navigation.map((item) => (
-									<a
+									<Link
 										key={item.name}
 										href={item.href}
 										className="-mx-3 block rounded-lg px-3 py-2 text-xl leading-7 text-zinc-500 hover:bg-gray-50">
 										{item.name}
-									</a>
+									</Link>
 								))}
 							</div>
 							<div className="py-6">

@@ -1,21 +1,13 @@
 "use client"
-/* eslint-disable */
+// /* eslint-disable */
 import React, { useState } from "react"
 import { Button, Label, TextInput } from "flowbite-react"
-import { getMonth, getDate, format, getYear } from "date-fns"
+import { getMonth, getDate, getYear } from "date-fns"
 import { ExclamationCircleIcon } from "@heroicons/react/20/solid"
 import * as z from "zod"
-import {
-	useForm,
-	useFieldArray,
-	FieldErrors,
-	useWatch,
-	Controller,
-	SubmitHandler,
-} from "react-hook-form"
+import { useForm, useFieldArray } from "react-hook-form"
 
 const date = new Date()
-// const currentYear = format(date, "yy")
 const currentYear = getYear(date)
 const currentMonth = getMonth(date)
 const currentDay = getDate(date)
@@ -24,11 +16,8 @@ const QAFormSchema = z.object({
 	showDate: z
 		.object({
 			MM: z.number().int().min(1).max(12),
-			// .transform((v) => Number(v) || 0),
 			DD: z.number().int().min(1).max(31),
-			// .transform((v) => Number(v) || 0),
 			YY: z.number().min(1).max(currentYear),
-			// .transform((v) => Number(v) || 0),
 		})
 		.optional(),
 	QnA: z.array(
@@ -72,7 +61,6 @@ function QuestionAnswerForm() {
 
 	const onSubmit = (data: FormValues | FormValues[]) => {
 		setIsLoading(true)
-		// await new Promise((resolve) => setTimeout(resolve, 2000))
 		console.log("Form Data", data)
 		setIsLoading(false)
 		// reset()
@@ -83,7 +71,6 @@ function QuestionAnswerForm() {
 			<div className="grid w-full grid-cols-12 gap-4 p-4 mt-4 bg-white/40 rounded-xl min-h-16">
 				<h1 className="text-3xl text-yellow-500">QuestionForm</h1>
 				<p className="col-span-full">Upload your question</p>
-				{/* <div className="grid grid-cols-12 mt-10 gap-x-6 gap-y-8"> */}
 				<div className=" col-span-full">
 					{/* start individual inputs */}
 					{/* Render dynamic inputs for questions */}

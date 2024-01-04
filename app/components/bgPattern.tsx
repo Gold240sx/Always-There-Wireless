@@ -25,7 +25,7 @@ const BgPattern = () => {
 								y={0}
 								width={4}
 								height={4}
-								className="text-gray-300"
+								className="text-gray-100"
 								fill="currentColor"
 							/>
 						</pattern>

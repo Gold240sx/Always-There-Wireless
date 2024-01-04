@@ -1,0 +1,70 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents { 
+  
+    match /users/{userId} {
+      allow read: if request.auth.uid == userId;
+      allow create: if request.auth.uid == userId;
+      allow update: if isUser() && !isRoleChange();
+      allow read, write,create, update: if isAdmin();
+
+
+			function isUser() {
+        return request.auth.uid == userId;
+      }
+      
+      function isAdmin() {
+     		return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "admin";
+   		}
+      
+      function isRoleChange() {
+        return request.resource.data.role != resource.data.role;
+      }
+      
+    }
+    match /jobs/{document=**} {
+  		allow read: if true; // Allow all users, including unauthenticated users, to read
+  		allow write: if isAdmin(); // Allow admins to write
+  
+  		function isAdmin() {
+    		return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "admin";
+  		}
+		}
+    match /applicants/{document=**} {
+  		allow read, write, create: if true; // Allow all users, including unauthenticated users, to read
+  		allow read, write, create, delete, update: if isAdmin(); // Allow admins to write
+  
+  		function isAdmin() {
+    		return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "admin";
+  		}
+		}
+    match /supportRequests/{document=**} {
+  		allow create: if true; // Allow all users, including unauthenticated users, to create
+  		allow read, write: if isAdmin(); // Allow admins to write
+  
+  		function isAdmin() {
+    		return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "admin";
+  		}
+		}
+    match /subscribers/{document=**} {
+  		allow create: if true; // Allow all users, including unauthenticated users, to create
+  		allow read, write: if isAdmin(); // Allow admins to write
+  
+  		function isAdmin() {
+    		return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "admin";
+  		}
+		}
+      match /jobApplicants/{document=**} {
+  		allow read, write, update, create: if true; // Allow all users, including unauthenticated users, to create
+
+		}
+    match /users {
+    	allow read, write, create, update: if isAdmin();
+      
+      function isAdmin() {
+     		return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "admin";
+   		}
+    }
+  }
+}
