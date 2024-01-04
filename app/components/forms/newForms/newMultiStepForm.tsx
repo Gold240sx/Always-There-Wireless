@@ -157,13 +157,14 @@ export default function MultiForm() {
 	return (
 		<section className="inset-0 flex flex-row justify-between min-h-full gap-8 lg:items-center lg:pl-0 bg-zinc-50 lg:pt-24 md:pt-12 md:gap-0 md:flex-col">
 			{/*  steps */}
+			<h1 className="sr-only">Multi Step Form</h1>
 			<StepperNav steps={steps} currentStep={currentStep} />
 
 			<div className="flex flex-col w-full min-h-full px-6 py-10 bg-white">
 				<div className="flex flex-col w-full max-w-[54rem] mx-auto">
 					{/*  form */}
 					<form
-						className="md:py-12"
+						className="md:pb-12"
 						onSubmit={handleSubmit(processForm)}>
 						{currentStep === 0 && (
 							<motion.div
@@ -176,7 +177,7 @@ export default function MultiForm() {
 									duration: 0.3,
 									ease: "easeInOut",
 								}}>
-								<div className="grid grid-cols-12 pr-14 md:pr-0 md:px-6'">
+								<div className="grid grid-cols-12  md:px-6'">
 									<ContactForm
 										{...formData}
 										formData={formData}
@@ -296,7 +297,7 @@ export default function MultiForm() {
 
 					{/* Navigation */}
 					{currentStep < steps.length - 1 && (
-						<div className="pt-8 pr-14 md:pr-0">
+						<div className="pt-8 md:pr-0">
 							<div className="flex justify-between">
 								<button
 									type="button"

@@ -11,7 +11,7 @@ const StepperNav = ({
 	return (
 		<nav
 			aria-label="Progress"
-			className="h-full py-10 mb-auto w-fit max-w-[54rem] md:w-full pl-4 md:pl-0 md:px-8">
+			className="h-full hidden sm:flex sm:flex-col py-10 mb-auto w-fit max-w-[54rem] md:w-full pl-4 md:px-8">
 			<ol
 				role="list"
 				className="space-y-4 md:flex h-fit md:space-x-6 md:space-y-0">

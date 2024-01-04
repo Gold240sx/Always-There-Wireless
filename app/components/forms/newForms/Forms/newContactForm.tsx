@@ -47,13 +47,13 @@ const ContactForm = ({
 
 	return (
 		<>
-			<h2 className="text-base font-semibold leading-7 text-gray-900 col-span-full">
+			<h2 className="md:text-base text-xl font-semibold leading-7 text-gray-900 col-span-full">
 				Contact Information
 			</h2>
 			<p className="mt-1 text-sm leading-6 text-gray-600 col-span-full">
 				Provide your contact information
 			</p>
-			<div className="flex flex-col mt-10 col-span-full gap-x-6 gap-y-8">
+			<div className="flex flex-col mt-10 col-span-full gap-x-6 gap-y-8 ">
 				{/* start individual inputs */}
 				<div className="sm:col-span-4">
 					<div className="flex justify-between px-1">

@@ -39,9 +39,9 @@ const PopupModal = ({
 			<div
 				className={` ${
 					formOpen && ""
-				} scrollbar-hide overflow-y-scroll right-10 bg-white rounded-xl fixed z-10 max-h-screen top-20 bottom-10 bottom-30 left-10 top-30 p-0 `}>
+				} scrollbar-hide min-w-[300px] overflow-y-scroll right-5 left-5 sm:right-10 bg-white rounded-xl fixed z-10 max-h-screen top-20 bottom-10 bottom-30 sm:left-10 top-30 p-0 `}>
 				<button
-					className="fixed z-50 w-10 h-10 border rounded-md bg-zinc-50 hover:text-bold hover:border-black hover:border-2 top-[104px] right-16"
+					className="fixed z-50 w-10 h-10 border rounded-md bg-zinc-50 hover:text-bold hover:border-black hover:border-2 top-[104px] right-11 sm:right-16"
 					onClick={toggleMainForm}>
 					X
 				</button>
