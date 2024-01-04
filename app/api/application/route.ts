@@ -23,6 +23,7 @@ export async function POST(request: Request) {
 	try {
 		const data = await resend.emails.send({
 			from: "Always There Wireless <info@alwaystherewireless.com>",
+			cc: "Dev <240designworks@gmail.com>",
 			to: "ohioacppts@gmail.com",
 			subject: "ATW - Application Request!!!",
 			react: ApplicationEmailTemplate({
