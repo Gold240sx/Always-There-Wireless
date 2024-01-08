@@ -7,7 +7,7 @@ export default async function Signin() {
 	return (
 		<section
 			id="signIn-page"
-			className="flex flex-col justify-center items-center align-middle p-0 bg-white col-span-full w-full">
+			className="flex flex-col justify-center items-center align-middle p-0  col-span-full w-full">
 			<Chevrons />
 			<div className="flex min-h-full flex-1 flex-col justify-center px-6 py-24 lg:px-8">
 				<div className="sm:mx-auto sm:w-full sm:max-w-sm">

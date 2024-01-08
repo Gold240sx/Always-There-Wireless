@@ -1,6 +1,6 @@
 import React from "react"
 // import QuestionForm from "@/app/components/forms/questionForm"
-import QuestionAnswerForm from "@/app/components/forms/QuestionAnswerForm"
+import QuestionAnswerForm from "@/app/components/forms/QuestionAnswerForm/QuestionAnswerForm"
 
 const AddQuestion: React.FC = () => {
 	return (

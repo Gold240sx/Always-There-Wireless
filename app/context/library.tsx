@@ -1,17 +1,677 @@
 // import React from "react"
-import { BibleRef } from "./BibleRef"
+import { BibleRef } from "./bibleRef"
+import wordsRef from "./words"
+import mishnahRef from "./mishnahRef"
+
+// type ChannelProps =
+// 	| {
+// 			value: string
+// 			label: string
+// 			speakers: string[]
+// 			link: string
+// 			social?: {
+// 				public?: {
+// 					facebook?: string
+// 					phone?: string
+// 					email?: string
+// 					whatsApp?: ""
+// 				}
+// 				private?: {
+// 					whatsApp?: string
+// 				}
+// 				schedule?: {
+// 					sunday: [
+// 						{
+// 							time?: "9:30 a.m."
+// 							zone?: "CST"
+// 							title?: "Let's Get Biblical Q&A (LIVE) Rabbi Tovia Singer"
+// 							speaker?: "Rabbi Tovia Singer"
+// 						},
+// 					]
+// 					monday: [
+// 						{
+// 							time?: "9:30 a.m."
+// 							zone?: "CST"
+// 							title?: "Let's Get Biblical Q&A (LIVE) Rabbi Tovia Singer"
+// 							speaker?: "Rabbi Tovia Singer"
+// 						},
+// 					]
+// 					tuesday: [
+// 						{
+// 							time?: "9:30 a.m."
+// 							zone?: "CST"
+// 							title?: "Let's Get Biblical Q&A (LIVE) Rabbi Tovia Singer"
+// 							speaker?: "Rabbi Tovia Singer"
+// 						},
+// 					]
+// 					wednesday: [
+// 						{
+// 							time?: "9:30 a.m."
+// 							zone?: "CST"
+// 							title?: "Let's Get Biblical Q&A (LIVE) Rabbi Tovia Singer"
+// 							speaker?: "Rabbi Tovia Singer"
+// 						},
+// 					]
+// 					thursday: [
+// 						{
+// 							time?: "9:30 a.m."
+// 							zone?: "CST"
+// 							title?: "Let's Get Biblical Q&A (LIVE) Rabbi Tovia Singer"
+// 							speaker?: "Rabbi Tovia Singer"
+// 						},
+// 					]
+// 					friday: [
+// 						{
+// 							time?: "9:30 a.m."
+// 							zone?: "CST"
+// 							title?: "Let's Get Biblical Q&A (LIVE) Rabbi Tovia Singer"
+// 							speaker?: "Rabbi Tovia Singer"
+// 						},
+// 					]
+// 					shabbos: [
+// 						{
+// 							time?: "9:30 a.m."
+// 							zone?: "CST"
+// 							title?: "Let's Get Biblical Q&A (LIVE) Rabbi Tovia Singer"
+// 							speaker?: "Rabbi Tovia Singer"
+// 						},
+// 					]
+// 				}
+// 			}
+// 			schedule?: [
+// 				{
+// 					sunday: [
+// 						{
+// 							time: string
+// 							zone: string
+// 							title: string
+// 							speaker: string
+// 						},
+// 						{
+// 							time: string
+// 							zone: string
+// 							title: string
+// 							speaker: string
+// 						},
+// 					]
+// 					monday: [
+// 						{
+// 							time: string
+// 							zone: string
+// 							title: string
+// 							speaker: string
+// 						},
+// 						{
+// 							time: string
+// 							zone: string
+// 							title: string
+// 							speaker: string
+// 						},
+// 					]
+// 					tuesday: [
+// 						{
+// 							time: string
+// 							zone: string
+// 							title: string
+// 							speaker: string
+// 						},
+// 					]
+// 					wednesday: [
+// 						{
+// 							time: string
+// 							zone: string
+// 							title: string
+// 							speaker: string
+// 						},
+// 						{
+// 							time: string
+// 							zone: string
+// 							title: string
+// 							speaker: string
+// 						},
+// 					]
+// 					thursday: [
+// 						{
+// 							time: string
+// 							zone: string
+// 							title: string
+// 							speaker: string
+// 						},
+// 					]
+// 					friday: [
+// 						{
+// 							time: string
+// 							zone: string
+// 							title: string
+// 							speaker: string
+// 						},
+// 					]
+// 					sabbath: [
+// 						{
+// 							time: string
+// 							zone: string
+// 							title: string
+// 							speaker: string
+// 						},
+// 					]
+// 				},
+// 			]
+// 	}
+// 	| { value: "Other"; label: "Other" }
 
 const SiteParams = {
-	// companyLogo: {
-	// 	icon: "/app/assets/icons/tenaktalk_icon_lg.png",
-	// 	medium: "/tenaktalk_icon_lg.png",
-	// 	large: "/app/assets/icons/tenaktalk_icon_lg.png",
-	// },
-	companyName: "TenakTalk",
+	companyName: "Tenak.Study",
+	website: "tenak.study",
 	navigation: [
 		{ name: "About", href: "/about" },
+		{ name: "Questions", href: "/questions" },
 		{ name: "Add Question", href: "/addQuestion" },
+		{ name: "Add Question2", href: "/addQuestion2" },
 		{ name: "Careers", href: "/careers" },
+	],
+	channels: {
+		selectOptions: [
+			{
+				value: "Tenak Talk",
+				label: "Tenak Talk",
+				speakers: [
+					"Tovia Singer",
+					"Greg Mcbride",
+					"Michael Skobac",
+					"Rabbi Stuart Federow",
+					"Other",
+				],
+				link: "https://www.youtube.com/@tenaktalk",
+				social: {
+					public: {
+						facebook: "https://www.facebook.com/TeNaKTalk/",
+						phone: "(855) 952-4253",
+						email: "william@tanachtalk.com",
+					},
+					private: {
+						whatsApp: "",
+					},
+				},
+				schedule: {
+					sunday: [
+						{
+							time: "9:30 a.m.",
+							zone: "CST",
+							title: "Let's Get Biblical Q&A (LIVE) Rabbi Tovia Singer",
+							speaker: "Rabbi Tovia Singer",
+						},
+						{
+							time: "7:00 p.m.",
+							zone: "CST",
+							title: "***most Sundays*** 2-Guys Premiere (REPLAY)",
+							speaker: "Greg Mcbride",
+						},
+					],
+					monday: [
+						{
+							time: "9:00 a.m.",
+							zone: "CST",
+							title: "A Rabbi Cross-Examines the New Testament (LIVE) Rabbi Michael Skobac",
+							speaker: "Rabbi Michael Scobac",
+						},
+						{
+							time: "7:00 p.m.",
+							zone: "CST",
+							title: "TNT (LIVE) with Rabbi Stuart Federow",
+							speaker: "Rabbi Stuart Federow",
+						},
+					],
+					tuesday: [
+						{
+							time: "7:00 p.m.",
+							zone: "CST",
+							title: "***Most Tuesdays*** Premiere (REPLAY)",
+							speaker: "",
+						},
+					],
+					wednesday: [
+						{
+							time: "5:30 p.m.",
+							zone: "CST",
+							title: "Torah Talk Weekly Parsha (LIVE)",
+							speaker: "Rabbi Michael Scobac",
+						},
+						{
+							time: "7:00 p.m.",
+							zone: "CST",
+							title: "2 Guys with Greg McBride (LIVE)",
+							speaker: "Greg Mcbride",
+						},
+					],
+					thursday: [
+						{
+							time: "7:00 p.m.",
+							zone: "CST",
+							title: " ***Most Thursdays*** Premiere (REPLAY)",
+							speaker: "",
+						},
+					],
+					friday: {},
+					sabbath: {},
+				},
+			},
+			{
+				value: "Tovia Singer",
+				label: "Tovia Singer",
+				speakers: ["Rabbi Tovia Singer", "Dr Roi Yozevitch"],
+				link: "https://www.youtube.com/@ToviaSinger1",
+			},
+			{
+				value: "NETIV",
+				label: "NETIV",
+				speakers: ["Rod Bryan", "Tovia Singer", "Rabbi Yaakov Wolbe"],
+				link: "https://www.youtube.com/@NetivOnline",
+			},
+			{
+				value: "Jews For Judaism",
+				label: "Jews For Judaism",
+				speakers: ["Michael Skobac", "Tovia Singer"],
+				link: "https://www.youtube.com/@JewsforJudaismCanada",
+			},
+			{
+				value: "Rabbi YY Jacobson",
+				label: "Rabbi YY Jacobson",
+				speakers: ["Rabbi YY Jacobson"],
+				link: "https://www.youtube.com/@RabbiYYJacobson",
+			},
+			{
+				value: "Chevra Rav Moshe Chaim",
+				label: "Chevra Rav Moshe Chaim",
+				speakers: ["Chevra Rav Moshe Chaim"],
+				link: "https://www.youtube.com/@ChevraRavMosheChaim",
+			},
+			{
+				value: "Simon Jacobson - Meaningful Life Center",
+				label: "Simon Jacobson - Meaningful Life Center",
+				speakers: ["Simon Jacobson"],
+				link: "https://www.youtube.com/@Meaningfullifecenter",
+			},
+			{
+				value: "Rav Dror - Freedom Through Faith",
+				label: "Rav Dror - Freedom Through Faith",
+				speakers: ["Rav Dror"],
+				link: "https://www.youtube.com/ravdror",
+			},
+			{ value: "Other", label: "Other" },
+		],
+	},
+	resources: {
+		channels: [
+			{
+				type: "channel",
+				name: "Aleph Beta",
+				link: "https://www.youtube.com/@AlephBeta",
+				focuses: [
+					{
+						id: 1,
+						focus: "https://youtube.com/playlist?list=PLmG0lNuEBb3BHcFiSS8mqo6n80hhMBZcn&si=69DQPnvGNwv9J6o0",
+						focusLabel: "Weekly Parsha Experiment",
+						description: "",
+						type: "video series",
+					},
+				],
+			},
+			{
+				type: "channel",
+				name: "Meaningful People",
+				link: "https://www.youtube.com/@MeaningfulPeople",
+			},
+		],
+		education: {
+			books: [
+				// counter-missionary
+				{
+					focus: "counter-missionary / Christian Study",
+					name: "Let's Get Biblical",
+					link: "https://outreachjudaism.org/shop/lets-get-biblical-expanded-2-volume-study-guide/",
+					publisher: "Outreach Judaism",
+					author: "Rabbi Tovia Singer",
+					description: "Christian / Jewish Belief and Text Comparison",
+					image: "",
+					language: "English"
+				},
+				{
+					focus: "counter-missionary / Christian Study",
+					name: "Judaism & Christianity: A Contrast",
+					link: "https://amzn.to/3Tjq4Vw",
+					publisher: "iUniverse",
+					author: "Rabbi Stuart Federow",
+					description: "A comparison of Judaism and Christianity",
+					image: "",
+					language: "English"
+				},
+				{
+					focus: "counter-missionary / Christian Study",
+					name: "Judaismo y Cristianismo: Un contraste (Spanish Edition)",
+					link: "https://amzn.to/3zYah7B",
+					publisher: "iUniverse",
+					author: "Rabbi Stuart Federow",
+					description: "Una comparación del judaísmo y el cristianismo",
+					image: "",
+					language: "Spanish"
+				},
+				// Noahide Study
+				{
+					focus: "Noahide Study",
+					name: "The Seven Laws of Noah",
+					link: "https://www.amazon.com/Seven-Laws-Noah-Aaron-Lichtenstein/dp/B0006E205I",
+					publisher: "The Rabbi Jacob Joseph School Press; First Edition",
+					author: "Aaron Lichtenstein",
+					description: "A detailed exposition of the Noachide laws.",
+					image: "",
+					language: "English"
+				},
+				{
+					focus: "Noahide Study",
+					name:  "The Noahide Laws (Study Edition)",
+					link: "https://www.amazon.com/Noahide-Laws-Complete-Volumes-1-22/dp/1949126013/ref=sr_1_1?keywords=The+Noahide+laws&qid=1704266428&sr=8-1",
+					publisher: "Yeshiva Pirchei Shoshanim",
+					author: "Yeshiva Pirchei Shoshanim",
+					description: "A study of the Noahide Laws",
+					image: "",
+					language: "English"
+				},
+				// Jewish Conversion / Bal Teshuvah
+				{
+					focus: "Jewish Teshuvah / Conversion",
+					name: "To Be a Jew: A Guide to Jewish Observance in Contemporary Life",
+					link: "https://www.amazon.com/Be-Jew-Jewish-Observance-Contemporary/dp/1541674022/ref=sr_1_1?crid=59TZZ2VJTCBE&keywords=to+be+a+jew&qid=1704266516&sprefix=to+be+a+jew%2Caps%2C136&sr=8-1",
+					author: "Rabbi Hayim H. Donin",
+					publisher: "Basic Books",
+					description: "A guide to Jewish observance in contemporary life",
+					image: "",
+					language: "English"
+				},
+				{
+					focus: "Jewish Life",
+					name: "The Jewish Book of Why & The Second Jewish Book of Why (2 volumes in slipcase)",
+					link: "https://www.amazon.com/gp/product/0824603141/ref=sw_img_1?smid=ATVPDKIKX0DER&psc=1",
+					publisher: "Jonathan David Publishers",
+					author: "Alfred J. Kolatch",
+					description: "Answers to questions about Jewish life and thought",
+					image: "",
+					language: "English"
+				},
+				// Chumash
+				{
+					focus: "Chumash (Oral + Written Torah)",
+					name: "The Chumash: The Stone Edition, Full Size (ArtScroll) (English and Hebrew Edition) The Torah: Haftaros and Five Megillos with a Commentary Anthologized from the Rabbinic Writings",
+					link: "https://www.amazon.com/Chumash-ArtScroll-Haftaros-Commentary-Anthologized/dp/0899060145/ref=pd_rhf_dp_s_pd_sbs_rvi_d_sccl_1_1/140-7992359-8104520?pd_rd_w=aHX0b&content-id=amzn1.sym.a089f039-4dde-401a-9041-8b534ae99e65&pf_rd_p=a089f039-4dde-401a-9041-8b534ae99e65&pf_rd_r=JXDF2EREBE02PWFCD0B5&pd_rd_wg=TUqnu&pd_rd_r=7940d3a9-c66f-4734-b3a7-dedbe0861b3b&pd_rd_i=0899060145&psc=1",
+					publisher: "ArtScroll Mesorah",
+					author: "Nossan Scherman",
+					description: "Classic (and widely accepted) Chumash with a commentary anthologized from the Rabbinic writings",
+					image: "",
+					language: "Hebrew / English"
+				},
+				{
+					focus: "Chumash (Oral + Written Torah)",
+					name: "Torah Chumash Synagogue Edition",
+					link: "https://www.amazon.com/dp/0826601960/?coliid=I3SGKGFJOLCS2S&colid=3CILFH6MZ17Z&psc=1&ref_=list_c_wl_lv_ov_lig_dp_it",
+					publisher: "Merkos Linyonei Chinuch",
+					author: "Moshe Wisnefsky",
+					description: "Hebrew / English Chumash (Chassidic)",
+					image: "",
+					language: "Hebrew / English"
+				},
+				{
+					focus: "Chumash (Oral + Written Torah)",
+					name: "Chumash: The Gutnick Edition - All in one - Synagogue Edition",
+					link: "https://www.amazon.com/gp/product/1934152013/ref=ppx_yo_dt_b_asin_title_o03_s00?ie=UTF8&psc=1",
+					publisher: "Kol Menachem",
+					author: "Rabbi Chaim Miller",
+					description: "Hebrew / English Chumash (Chassidic) with Talmudic Commentary",
+					image: "",
+					language: "Hebrew / English"
+				},
+				{
+					focus: "Chumash (Oral + Written Torah)",
+					name: "The Milstein Edition Chumash with the Teachings of the Talmud - Slipcased Set (Hebrew Edition)",
+					link: "https://www.amazon.com/gp/product/1422625974/ref=ppx_yo_dt_b_asin_title_o06_s01?ie=UTF8&psc=1",
+					publisher: "Mesorah Publications",
+					author: "",
+					description: "Hebrew / English Chumash with Talmudic Commentary",
+					image: "",
+					language: "Hebrew / English"
+				},
+				{
+					focus: "Chumash (Oral + Written Torah)",
+					name: "Czuker Edition Hebrew Tanach Mikra'os Gedolos Full Size Set - 18 Volumes",
+					link: "https://www.artscroll.com/Books/9781422627723.html",
+					publisher: "Artscroll Mesorah",
+					author: "",
+					description: "Hebrew / English Chumash with Commentary from the MIdrash, Talmud, and Classic Rabbinic Sources",
+					image: "",
+					language: "Hebrew"
+				},
+				{
+					focus: "Writings (Ketuvim) - (Tenak)",
+					name: "Kesuvim Hebrew and English Full Size 6 Volume Slipcased Set",
+					link: "https://www.amazon.com/Kesuvim-Hebrew-English-Full-Slipcased/dp/1422622312/ref=pd_bxgy_img_d_sccl_1/140-7992359-8104520?pd_rd_w=8Puj8&content-id=amzn1.sym.2b132e63-5dcd-4ba1-be9f-9e044543d59f&pf_rd_p=2b132e63-5dcd-4ba1-be9f-9e044543d59f&pf_rd_r=VM1KSF5PMVYSEXMDT5J2&pd_rd_wg=LwgUs&pd_rd_r=57472f82-bd8d-4735-9c08-130927b273cb&pd_rd_i=1422622312&psc=1",
+					publisher: "ArtScroll Mesorah",
+					author: "",
+					description: "The Writings (Psalms, Proverbs, Job, Song of Songs, Ruth, Lamentations, Ecclesiastes, Esther, Daniel, Ezra, Nehemiah, Chronicles) with a commentary anthologized from the Rabbinic writings",
+					image: "",
+					language: "Hebrew / English"
+				},
+				{
+					focus: "Nevi'im (Prophets) - (Tenak)",
+					name: "The Rubin Edition of the Early Prophets - Personal size - 5 Volume Slipcased Set",
+					link: "https://www.amazon.com/Rubin-Early-Prophets-Personal-Slipcased/dp/B003BQ9LUU/ref=sr_1_1?crid=H8Z0X2634GFN&keywords=artscroll+early+prophets&qid=1704269808&s=books&sprefix=artscroll+early+prophets%2Cstripbooks%2C161&sr=1-1&ufe=app_do%3Aamzn1.fos.006c50ae-5d4c-4777-9bc0-4513d670b6bc",
+					publisher: "ArtScroll Mesorah",
+					author: "Nossan Scherman",
+					description: "The Early Prophets (Joshua, Judges, Samuel, 1 Kings, 2 Kings) with a commentary anthologized from the Rabbinic writings",
+					image: "",
+					language: "Hebrew / English"
+				},
+				{
+					focus: "Nevi'im (Prophets) - (Tenak)",
+					name: "The Milstein Edition of the Later Prophets Set (4 vol.)",
+					link: "https://www.amazon.com/Prophets-Joshua-Judges-ArtScroll-Mesorah/dp/1578193311/ref=pd_sbs_d_sccl_1_2/140-7992359-8104520?pd_rd_w=qiN1N&content-id=amzn1.sym.89676150-e513-422e-84a9-9c8b85f32b61&pf_rd_p=89676150-e513-422e-84a9-9c8b85f32b61&pf_rd_r=WC5TASJZYMND3TB0WK1N&pd_rd_wg=VuCZ8&pd_rd_r=e38d7b2e-d2bd-42c3-adac-eb9d97e9e38e&pd_rd_i=1578193311&psc=1",
+					publisher: "Artscroll",
+					author: "The Milstein Edition of the Later Prophets Set (4 vol.)",
+					description: "The Later Prophets (Isaiah, Jeremiah, Ezekiel, and the Twelve Minor Prophets) with a commentary anthologized from the Rabbinic writings",
+					image: "",
+					language: "Hebrew / English"
+				},
+				//Siddurim
+				// // Ashkinaz
+				{
+					focus: "Siddur (Jewish Prayer Book)",
+					name: "Schottenstein Edition Siddur Interlinear Weekday Full Size Ahkenaz",
+					link: "https://www.amazon.com/Siddur-Interlinear-Weekday-Ashkenaz-Schottenstein/dp/1578196817/ref=sr_1_2?crid=2KL68Y64FZIH6&keywords=Schottenstein+Edition+Siddur+Interlinear+weekdays+ashkenaz+Full+Size&qid=1704271851&s=books&sprefix=schottenstein+edition+siddur+interlinear+weekdays+ashkenaz+full+size%2Cstripbooks%2C105&sr=1-2",
+					publisher: "Artsroll Mesorah",
+					author: "Rabbi Raphael Pelcovitz",
+					description: "Siddur (Jewish Prayer Book) - Weekdays (Ashkenaz)",
+					image: "",
+					language: "Hebrew /English"
+				},
+				{
+					focus: "Siddur (Jewish Prayer Book)",
+					name: "Schottenstein Edition Siddur Interlinear Sabbath & Festivals Full Size Ahkenaz",
+					link: "https://www.amazon.com/Hebrew-English-Interlinear-Translation-Siddur/dp/B001GOATBE/ref=sr_1_11?crid=1NQGV727EFATB&keywords=siddur+hebrew+english&qid=1704270987&s=books&sprefix=siddur%2Cstripbooks%2C141&sr=1-11",
+					publisher: "Artsroll Mesorah",
+					author: "Menachem Davis",
+					description: "Siddur (Jewish Prayer Book) - Sabbath & Festivals (Ashkenaz)",
+					image: "",
+					language: "Hebrew /English"
+				},
+				// // Sefard
+				{
+					focus: "Siddur (Jewish Prayer Book)",
+					name: "Schottenstein Edition Siddur Interlinear Weekday Full Size Sefard following the Customs of Eretz Yisroel In memory of Sammy Yitzchok Farkas",
+					link: "https://www.amazon.com/Hebrew-English-Interlinear-Translation-Siddur/dp/B001GOATBE/ref=sr_1_11?crid=1NQGV727EFATB&keywords=siddur+hebrew+english&qid=1704270987&s=books&sprefix=siddur%2Cstripbooks%2C141&sr=1-11",
+					publisher: "Artsroll Mesorah",
+					author: "Rabbi Menachem Davis",
+					description: "Siddur (Jewish Prayer Book) - Weekdays (Sefard)",
+					image: "",
+					language: "Hebrew /English"
+				},
+				{
+					focus: "Siddur (Jewish Prayer Book)",
+					name: "Schottenstein Edition Siddur Interlinear Sabbath & Festivals Full Size Sefard",
+					link: "https://www.amazon.com/Siddur-Interlinear-Sabbath-Festivals-Full/dp/B09WTGZRKQ/ref=sr_1_9?crid=6K4GMHIW2DNW&keywords=siddur+hebrew+english+schottenstein+nusach+sefard&qid=1704271556&s=books&sprefix=siddur+hebrew+english+schottenstein+nusach+sefard%2Cstripbooks%2C102&sr=1-9",
+					publisher: "Artsroll Mesorah",
+					author: "Menachem Davis",
+					description: "Siddur (Jewish Prayer Book) - Sabbath + Festivals (Sefard)",
+					image: "",
+					language: "Hebrew /English"
+				},
+				// Jewish Law (Halacha)
+				{
+					focus: "Jewish Law (Halacha)",
+					name: "Shulchan Oruch",
+					link: "https://store.kehotonline.com/mobile/prodinfo.asp?number=EAR-SHULO.NSB",
+					publisher: "Kehot Publication Society",
+					author: "Rabbi Schneur Zalman of Liadi",
+					description: "Shulchan Aruch: Code of Jewish Law - (Sefard)",
+					image: "",
+					language: "Hebrew / English"
+				},
+				{
+					focus: "Jewish Law (Halacha)",
+					name: "Code of Jewish Law (Annotated Kitzur Shulchan Aruch)",
+					link: "https://www.amazon.com/Code-Jewish-law-shulhan-compilation/dp/B0007FFFUI/ref=tmm_hrd_swatch_0?_encoding=UTF8&qid=1704267521&sr=8-3",
+					publisher: "Hebrew Publishing Company",
+					author: "Rabbi Solomon Ganzfried",
+					description: "Compilation of Jewish Laws and Customs - (Ashkenazi)",
+					image: "",
+					language: "Hebrew / English"
+				},
+				{
+					focus: "Jewish Law (Halacha)",
+					name: "Kleinman Edition Kitzur Shulchan Aruch Code of Jewish Law 5 Vol Slipcased Set",
+					link: "https://www.amazon.com/Kleinman-Kitzur-Shulchan-Jewish-Slipcased/dp/B09X66R58J/ref=sr_1_1?crid=2J0VGZNB2KC56&keywords=Code+of+Jewish+Law+%28Annotated+Kitzur+Shulchan+Aruch%29&qid=1704267486&sprefix=%2Caps%2C197&sr=8-1&ufe=app_do%3Aamzn1.fos.f5122f16-c3e8-4386-bf32-63e904010ad0",
+					publisher: "Mesorah Publications",
+					author: "",
+					description: "Shulchan Aruch: Code of Jewish Law - (Ashkenazi)",
+					image: "",
+					language: "Hebrew / English"
+				},
+				// Talmud
+				{
+					focus: "Gemara (Talmud)",
+					name: "Schottenstein Edition of the Mishnah Elucidated - Complete 23 Volume Set",
+					link: "https://www.artscroll.com/Books/9781422623008.html?gclid=CjwKCAiAqNSsBhAvEiwAn_tmxaGGIhklQuBr9cOpZm46tDTLC2wcM3ck6_NcIKfypsJNT7WPr9njwRoCvyAQAvD_BwE",
+					publisher: "ArtScroll Mesorah ",
+					author: "",
+					description: "Translated and annotated Mishnah with a commentary anthologized from the Rabbinic writings",
+					image: "",
+					language: "Hebrew / English"
+				},
+				// Tanya
+				{
+					focus: "Tanya (Chassidus/Chabbad Philosophy)",
+					name: "Tanya - Likutei Amarim (Revised Hebrew and English Edition)",
+					link: "https://www.amazon.com/Tanya-Likutei-Amarim-Revised-English/dp/0826604005/ref=sr_1_1?crid=3CN5URFQO80LG&keywords=Tanya+likutei+amarim&qid=1704267947&sprefix=tanya+likutei+amarim%2Caps%2C105&sr=8-1",
+					publisher: "Kehot Publication Society",
+					author: "Shneur Zalman of Liadi",
+					description: "Chassidic Philosophy",
+					image: "",
+					language: "Hebrew / English"
+				},
+				{
+					focus: "Tanya (Chassidus/Chabbad Philosophy)",
+					name: "Lessons in Tanya Large Edition - Slipcased",
+					link: "https://www.amazon.com/Lessons-Tanya-Large-Schneur-Boruchovich/dp/0826605109/ref=sr_1_19?crid=33HIT4G6CKPV0&keywords=Tanya&qid=1704267881&sprefix=tanya+%2Caps%2C139&sr=8-19&ufe=app_do%3Aamzn1.fos.f5122f16-c3e8-4386-bf32-63e904010ad0",
+					publisher: "Kehot Publication Society",
+					author: "Schneur Z. Boruchovich ",
+					description: "Chassidic Philosophy",
+					image: "",
+					language: "Hebrew / English"
+				},
+				// Daily Study
+				{
+					focus: "Hayom Yom (Daily Study)",
+					name: "Hayom Yom / Tackling Life's Tasks (Compact Edition)",
+					link: "https://www.amazon.com/dp/B00BPXZ330/?coliid=I12GCNO2TYSL9R&colid=3CILFH6MZ17Z&psc=0&ref_=list_c_wl_lv_ov_lig_dp_it",
+					publisher: "Sichos In English",
+					author: "Rabbi Menachem Mendel Schneerson",
+					description: "Daily Chassidic teachings and glimpses into the spiritual lifestyle of Chabad-Lubavitch. ",
+					image: "",
+					language: "Hebrew / English"
+				},
+				// Hebrew Learning
+				{
+					focus: "Hebrew Learning",
+					name: "The First Hebrew Primer: The Adult Beginner's Path to Biblical Hebrew, Third Edition",
+					link: "https://www.amazon.com/First-Hebrew-Primer-Beginners-Biblical/dp/0939144158/ref=sr_1_1?hvadid=580750353809&hvdev=c&hvlocphy=9019573&hvnetw=g&hvqmt=e&hvrand=9957919098721242599&hvtargid=kwd-820403326&hydadcr=22563_13493224&keywords=the+first+hebrew+primer&qid=1704274622&sr=8-1",
+					publisher: "EKS Publishing",
+					author: "Ethelyn Simon",
+					description: "Comprensive Hebrew Learning",
+					image: "",
+					language: "Hebrew / English"
+				},
+				// {
+				// 	focus: "",
+				// 	name: "",
+				// 	link: "",
+				// 	publisher: "",
+				// 	author: "",
+				// 	description: "",
+				// 	image: ""
+				// language: "Hebrew / English"
+				// },
+			],
+			websites: [
+				{
+					url: "chabbad.org",
+					name: "Chabbad",
+					description: "Halacha, Torah, and Chassidus Study",
+				},
+				{
+					url: "Sefaria.org",
+					name: "Sefaria",
+					description: "Free Torah / Tenak Library",
+				},
+				{
+					url: "askNoah.org",
+					name: "Ask Noah",
+					description: "Noahide Study",
+				},
+				{
+					url: "jewfaq.org",
+					name: "Jew FAQ",
+					description: "Judaism 101",
+				},
+				// Biblical Hebrew Learning
+				{
+					url: "https://hebrewjumpstart.com",
+					name: "Hebrew Jumpstart",
+					description: "Learn to read Hebrew in 1 hour!",
+				},
+				// Question / Answer - other resources
+				{
+					url: "http://judaismsanswer.org",
+					name: "Judaisms Answer",
+					description: "Strengthening Jews by providing answers to questions about Judaism",
+				},
+				{
+					url: "https://whatjewsbelieve.org",
+					name: "What Jews Believe",
+					description: "Providing answers to Jews and non-Jews regarding Jewish beliefs.",
+				}
+			],
+		},
+	},
+	categoryOptions: [
+		{ value: "hashem", label: "Hashem" },
+		{ value: "noahidism", label: "Noahidism" },
+		{ value: "judaism", label: "Judaism" },
+		{ value: "christian", label: "Christianity" },
+		{ value: "prophecy", label: "Prophecy" },
+		{ value: "translations", label: "Translations" },
+		{ value: "messiah", label: "Messiah" },
+		{ value: "evangelism", label: "Evangelism" },
+		{ value: "Jewish Law", label: "Jewish Law (Halacha)" },
+		{ value: "conversion", label: "Conversion" },
+		{ value: "end-times", label: "End-times" },
+		{ value: "church history", label: "Church History" },
+		{ value: "jewish history", label: "Jewish History" },
 	],
 	footerNavigation: [
 		// {
@@ -76,6 +736,14 @@ const SiteParams = {
 		// 	),
 		// },
 	],
+	timePeriods: [
+		
+	]
+	// companyLogo: {
+	// 	icon: "/app/assets/icons/tenaktalk_icon_lg.png",
+	// 	medium: "/tenaktalk_icon_lg.png",
+	// 	large: "/app/assets/icons/tenaktalk_icon_lg.png",
+	// },
 }
 
-export { SiteParams, BibleRef }
+export { SiteParams, BibleRef, wordsRef, mishnahRef }

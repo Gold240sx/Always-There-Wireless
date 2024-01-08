@@ -35,3 +35,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 /app/api/keys/**
+
+devREADME.md
+not-allowed

@@ -25,11 +25,11 @@
 	}
 
 	:root {
-		/* --background: 0 0% 100%; */
+		--background: 0 0% 100%;
 		--foreground-rgb: 0, 0, 0;
 		--background-start-rgb: 214, 219, 220;
 		--background-end-rgb: 255, 255, 255;
-		/* --foreground: 240 10% 3.9%; */
+		--foreground: 240 10% 3.9%;
 		--card: 0 0% 100%;
 		--card-foreground: 240 10% 3.9%;
 
@@ -63,8 +63,8 @@
 		/* --background: 240 10% 3.9%;
 		--foreground: 0 0% 98%; */
 		--foreground-rgb: 255, 255, 255;
-		--background-start-rgb: 0, 0, 0;
-		--background-end-rgb: 0, 0, 0;
+		/* --background-start-rgb: 0, 0, 0;
+		--background-end-rgb: 0, 0, 0; */
 		height: 100dvh;
 		height: 100vh;
 		--card: 240 10% 3.9%;
@@ -98,10 +98,15 @@
 	}
 
 	body {
-		@apply bg-background  text-foreground;
+		/* @apply bg-background  text-foreground; */
 		overflow-y: scroll;
 		display: grid;
 		grid: auto / 1em 1fr 1em;
+	}
+
+	h1,
+	h2 {
+		white-space: nowrap;
 	}
 
 	/* For Webkit-based browsers (Chrome, Safari and Opera) */
@@ -133,6 +138,20 @@
 		box-shadow: none;
 	}
 
+	/* trying everything to keep this dropdown selector to go over the footer to no avail */
+	/* .css-1nmdiq5-menu */
+	body .css-*-menu,
+	body .css-1nmdiq5-menu,
+	body [id^="react-select-"][id$="-listbox"],
+	[class^="css-"],
+	[id^="react-select-"][id$="-listbox"] ~ * {
+		z-index: 9999 !important;
+	}
+
+	.css-1nmdiq5-menu {
+		z-index: 9999 !important;
+	}
+
 	/*  remove the autofill icon in safari from text inputs */
 	input::-webkit-contacts-auto-fill-button {
 		visibility: hidden;
@@ -148,6 +167,19 @@
 
 	input::-ms-reveal {
 		display: none;
+	}
+
+	@media (prefers-color-scheme: dark) {
+		/* :root {
+		/* --foreground-rgb: 255, 255, 255; */
+		/* --background-start-rgb: #1c2127;
+		--background-end-rgb: #1c2127; */
+		/*} */
+
+		/* select any elements that have an id that begins with #react-select-3-option-0 */
+		[id^="react-select-3-option-"] {
+			color: white !important;
+		}
 	}
 }
 
@@ -179,6 +211,17 @@
 	#react-select-3-listbox {
 		max-height: 200px;
 		overflow-y: scroll;
+	}
+	/* select any elements that have an id that begins with #react-select-3-option-0 */
+	[id^="react-select-3-option-"] {
+		color: #383838 !important;
+	}
+	/* select any elements that begin with "css-", end with "-control" and give it a background color of: #F9FAFB*/
+	/* [class^="css-"][class$="-container"] [class^="css-"][class$="-control"] { */
+	[class$="-control"] {
+		background-color: #f9fafb !important;
+		/* ^^ Takes care of changing the input color of the react selects to the flowbite input colors */
+		border-radius: 999;
 	}
 
 	/* react-calendar custom sizes */
